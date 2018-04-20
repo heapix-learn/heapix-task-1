@@ -1,8 +1,12 @@
 package com.heapix.alshund.task.service;
 
 import com.heapix.alshund.task.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
+@Service
+public interface UserService extends UserDetailsService {
 
-    User findById(Long id);
+    User loadById(Long id);
+
 }
