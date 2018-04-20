@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.Objects;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,7 +22,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existByUsername(String username) {
+
+        return Objects.equals(userRepository.existByUsername(username), BigInteger.ONE);
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return Objects.equals(userRepository.existByEmail(email), BigInteger.ONE);
+    }
+
+    @Override
+    public Long saveUser(User user) {
+
+        return userRepository.save(user).getId();
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+
+        return userRepository.findByUsername(username);
     }
 }

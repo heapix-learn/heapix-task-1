@@ -2,19 +2,18 @@ package com.heapix.alshund.task.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
-public class SignInRequest {
+public class SignUpResponse {
 
     @NotBlank
-    @Size(max = 40)
-    private String username;
+    private String message;
 
-    @NotBlank
-    @Size(max = 100)
-    private String password;
+    @NotNull
+    private boolean success;
 }

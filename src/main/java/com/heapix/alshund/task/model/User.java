@@ -41,6 +41,7 @@ public class User implements UserDetails {
 
     @NotNull
     @Column(name = "authority")
+    @Enumerated(EnumType.STRING)
     private Role authority;
 
     @NotNull

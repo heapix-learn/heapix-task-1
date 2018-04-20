@@ -21,6 +21,6 @@ public class SignUpRequest {
     private String password;
 
     @NotBlank
-    @Size
+    @Size(max = 100)
     private String matchingPassword;
 }
