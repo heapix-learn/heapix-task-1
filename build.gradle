@@ -1,6 +1,8 @@
 buildscript {
 	ext {
 		springBootVersion = '2.0.1.RELEASE'
+		mapstructVersion = '1.2.0.CR1'
+		generatedMapperSiurceDir = "${buildDir}/generated-scr/mapstrcut/main"
 	}
 	repositories {
 		mavenCentral()
@@ -10,28 +12,38 @@ buildscript {
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+plugins {
+	id 'java'
+	id 'eclipce'
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
+	id 'net.ltgt.apt' version '0.8'
+}
 
 group = 'com.heapix.alshund'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
-
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
+
 	compile('io.jsonwebtoken:jjwt:0.9.0')
 	compile('org.projectlombok:lombok:1.16.20')
-	compile group: 'org.mapstruc:mapstruct-processor:1.2.0.Final'
-	runtime('mysql:mysql-connector-java')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	compile('javax.mail:mail:1.4.7')
+
+	compile("org.mapstruct:mapstruct-jdk8:${mapstructVersion}")
+	apt("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+
+    runtime('mysql:mysql-connector-java')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
 }

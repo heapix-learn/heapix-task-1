@@ -13,4 +13,5 @@ public interface UserService extends UserDetailsService {
     boolean existByUsername(String username);
     boolean existByEmail(String email);
     Long saveUser(User user);
+    void saveVerificationToken(User user, String token);
 }

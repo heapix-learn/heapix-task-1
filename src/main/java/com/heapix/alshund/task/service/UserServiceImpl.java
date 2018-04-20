@@ -1,10 +1,13 @@
 package com.heapix.alshund.task.service;
 
 import com.heapix.alshund.task.model.User;
+import com.heapix.alshund.task.model.VerificationToken;
+import com.heapix.alshund.task.repository.TokenRepository;
 import com.heapix.alshund.task.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -16,9 +19,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenRepository tokenRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     @Override
     public User loadById(Long id) {
-        return userRepository.findById(id).orElse(null);//TODO:throw Exception;
+
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -35,7 +45,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long saveUser(User user) {
 
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user).getId();
+    }
+
+    @Override
+    public void saveVerificationToken(User user, String tokenValue) {
+
+        VerificationToken verificationToken = VerificationToken.builder().user(user).token(tokenValue).build();
+        tokenRepository.save(verificationToken);
     }
 
     @Override

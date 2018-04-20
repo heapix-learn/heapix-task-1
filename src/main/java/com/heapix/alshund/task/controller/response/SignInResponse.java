@@ -1,4 +1,4 @@
-package com.heapix.alshund.task.controller.dto;
+package com.heapix.alshund.task.controller.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
