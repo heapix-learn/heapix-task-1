@@ -6,6 +6,9 @@ import com.sun.org.apache.xpath.internal.operations.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,11 +27,18 @@ public class AuthenticationController {
     @PostMapping("/sign-in")
     public ResponseEntity<?> signIn(@Valid @RequestBody SignInRequest request) {
 
+        Authentication authentication = authenticationManager.authenticate(prepareAuthenticationToken(request));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         return ResponseEntity.ok(new String());
     }
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp() {
         return ResponseEntity.ok(new String());
+    }
+
+    private UsernamePasswordAuthenticationToken prepareAuthenticationToken(SignInRequest request) {
+
+        return new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
     }
 }

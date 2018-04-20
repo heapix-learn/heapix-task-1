@@ -1,11 +1,14 @@
 package com.heapix.alshund.task.service;
 
+import com.heapix.alshund.task.model.User;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +25,12 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
     @Value("${auth.token.key}")
     private String signingKey;
+
+    @Override
+    public String generateToken(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return prepareToken(user);
+    }
 
     @Override
     public Optional<String> getBearerToken(String header) {
@@ -64,6 +73,15 @@ public class JwtTokenServiceImpl implements JwtTokenService {
             logger.error("JWT claims string is empty");
         }
         return false;
+    }
+
+    private String prepareToken(User user) {
+
+        return Jwts.builder()
+                .setSubject(String.valueOf(user.getId()))
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, signingKey)
+                .compact();
     }
 
     private boolean find(String header, Matcher tokenMatcher) {
