@@ -1,6 +1,6 @@
-package com.heapix.alshund.task.filter;
+package com.heapix.alshund.task.controller.filter;
 
-import com.heapix.alshund.task.model.User;
+import com.heapix.alshund.task.repository.model.User;
 import com.heapix.alshund.task.service.JwtTokenService;
 import com.heapix.alshund.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

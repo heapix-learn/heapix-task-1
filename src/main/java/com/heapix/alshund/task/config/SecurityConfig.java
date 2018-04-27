@@ -1,6 +1,6 @@
 package com.heapix.alshund.task.config;
 
-import com.heapix.alshund.task.filter.JwtAuthenticationFilter;
+import com.heapix.alshund.task.controller.filter.JwtAuthenticationFilter;
 import com.heapix.alshund.task.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

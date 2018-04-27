@@ -1,4 +1,4 @@
-package com.heapix.alshund.task.model;
+package com.heapix.alshund.task.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

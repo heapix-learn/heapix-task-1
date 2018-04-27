@@ -1,4 +1,4 @@
-package com.heapix.alshund.task.model;
+package com.heapix.alshund.task.repository.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

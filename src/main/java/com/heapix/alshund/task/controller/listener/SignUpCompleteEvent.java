@@ -1,6 +1,6 @@
 package com.heapix.alshund.task.controller.listener;
 
-import com.heapix.alshund.task.model.User;
+import com.heapix.alshund.task.repository.model.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.context.ApplicationEvent;

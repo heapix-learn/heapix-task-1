@@ -1,6 +1,6 @@
 package com.heapix.alshund.task.service;
 
-import com.heapix.alshund.task.model.User;
+import com.heapix.alshund.task.repository.model.User;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -11,6 +11,17 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: shundrikaleksey@gmail.com
+    password: '!Islonimski_sokI!'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 logging:
   level:
     org:
@@ -19,4 +30,4 @@ logging:
 
 auth:
   token:
-    key: slonimski_sok
+    key: inst
